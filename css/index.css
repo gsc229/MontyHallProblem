@@ -1,0 +1,93 @@
+html {
+  font-size: 62.5%;
+}
+h1 {
+  font-size: 4rem;
+}
+* {
+  margin: 10px;
+  margin: 0 auto;
+  height: fit-content;
+}
+.wrapper {
+  max-width: 960px;
+}
+.banner {
+  height: 15vh;
+}
+.banner h1 {
+  width: fit-content;
+  margin: 20px auto;
+}
+.container {
+  text-align: center;
+}
+img {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  top: 58%;
+}
+.goat {
+  /* background-image: url(/img/goat1.png); */
+  left: -30px;
+}
+.car {
+  /* background-image: url(/img/ferrari.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom; */
+  width: 250px;
+  left: -25px;
+}
+.door-container {
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  padding: 30px;
+}
+.door {
+  height: 400px;
+  width: 200px;
+  font-size: 20px;
+  background-image: url(/img/door-closed-red.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.door:hover {
+  cursor: pointer;
+}
+.results {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin: 50px;
+  border: 2px solid blue;
+  font-size: 20px;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  margin: 20px auto;
+}
+.btn-container .game-btn {
+  border-radius: 5%;
+  border: none;
+  font-size: 2.3rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background: #ad0703;
+  background-color: hsl(1, 97%, 35%);
+  color: whitesmoke;
+  margin: 10px;
+  height: fit-content;
+  padding: 20px;
+}
+.btn-container .game-btn:hover {
+  cursor: pointer;
+  background: rgba(160, 7, 3, 0.8);
+  border: 5px solid black;
+}
+.btn-container .game-btn:disabled {
+  background: grey;
+}

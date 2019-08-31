@@ -1,16 +1,26 @@
 let doorsArray = document.querySelectorAll(".door");
-//let insideArry = document.querySelectorAll(".insideDoor");
+// door variables:
 let openImg = "/img/door-open-red.png";
 let closeImg = "/img/door-closed-red.png";
+//create goats and car vairables:
+// car
 let carImg = "/img/ferrari.png";
-let goatImg = "/img/goat1.png";
 let car = document.createElement("img");
+car.setAttribute("src", `${carImg}`);
+car.className = "car";
+// goat
+let goatImg = "/img/goat1.png";
 let goat = document.createElement("img");
-let goat2 = document.createElement("img");
-car.src = carImg;
-goat.src = goatImg;
-goat.style.display = "none";
-goat2.src = goatImg;
+goat.setAttribute("src", `${goatImg}`);
+goat.className = "goat";
+goat.cloneNode(true);
+console.log(goat);
+console.log(car);
+
+//car.src = carImg;
+//goat.src = goatImg;
+//goat.style.display = "none";
+
 // host text box
 let hostSays = document.getElementById("hostSays");
 // buttons
@@ -25,14 +35,22 @@ function assignCarGoats() {
   let doorNumber = Math.floor(Math.random() * 3);
   //insideArry[doorNumber].src = carImg;
   // console.log(`src: ${insideArry[doorNumber].src}`);
-
-  doorsArray[doorNumber].appendChild(document.createElement("img"));
-  doorsArray[doorNumber].firstElementChild.className = "car";
+  doorsArray[doorNumber].appendChild(car);
+  /* doorsArray[doorNumber].appendChild(document.createElement("img")); */
+  // setting a src attribute on the image gets rid of an unwanted border
+  /*   doorsArray[doorNumber].firstElementChild.setAttribute(
+    "src",
+    "/img/ferrari.png"
+  );
+  doorsArray[doorNumber].firstElementChild.className = "car"; */
+  // ASSIGNING GOATS TO DOORS cannot append preveiously made goat variable twice
   doorsArray.forEach(function(ele) {
     if (ele.childElementCount === 0) {
-      ele.appendChild(document.createElement("img"));
-      ele.firstElementChild.className = "goat";
-      //ele.firstElementChild.style.display = "none";
+      ele.appendChild(goat.cloneNode(true));
+      /* ele.appendChild(document.createElement("img"));
+      ele.firstElementChild.setAttribute("src", "/img/goat1.png");
+      ele.firstElementChild.className = "goat"; */
+      ele.firstElementChild.style.display = "none";
     } //else ele.firstElementChild.style.display = "none";
   });
 }

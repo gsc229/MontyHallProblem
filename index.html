@@ -9,40 +9,46 @@
   </head>
 
   <body>
-    <h1 id="hostSays">Choose a door</h1>
-    <div class="door-container container">
-      <div class="door" id="door1" onclick="choose(this.id)">
-        <!-- <img class="insideDoor" alt="" /> -->
+    <div class="wrapper">
+      <div class="banner">
+        <h1 id="hostSays">Choose a door</h1>
       </div>
-      <div class="door" id="door2" onclick="choose(this.id)">
-        <!-- <img class="insideDoor" alt="" /> -->
+
+      <div class="door-container container">
+        <div class="door" id="door1" onclick="choose(this.id)">
+          <!-- <img class="insideDoor" alt="" /> -->
+        </div>
+        <div class="door" id="door2" onclick="choose(this.id)">
+          <!-- <img class="insideDoor" alt="" /> -->
+        </div>
+        <div class="door" id="door3" onclick="choose(this.id)">
+          <!-- <img class="insideDoor" alt="" /> -->
+        </div>
       </div>
-      <div class="door" id="door3" onclick="choose(this.id)">
-        <!-- <img class="insideDoor" alt="" /> -->
+
+      <div class="btn-container container">
+        <button
+          type="button"
+          disabled
+          class="game-btn"
+          id="lockChoice"
+          onclick="openGoat()"
+        >
+          Ok, I've chosen my door
+        </button>
+        <button type="button" disabled class="game-btn" id="switch-btn">
+          Switch</button
+        ><br />
+        <button type="button" disabled class="game-btn" id="stay-btn">
+          Stay
+        </button>
+      </div>
+      <div class="results-container container">
+        <div class="results" id="wins">Wins</div>
+        <div class="results" id="losses">Losses</div>
       </div>
     </div>
 
-    <div class="btn-container container">
-      <button
-        type="button"
-        disabled
-        class="game-btn"
-        id="lockChoice"
-        onclick="openGoat()"
-      >
-        Ok, I've chosen my door
-      </button>
-      <button type="button" disabled class="game-btn" id="switch-btn">
-        Switch</button
-      ><br />
-      <button type="button" disabled class="game-btn" id="stay-btn">
-        Stay
-      </button>
-    </div>
-    <div class="results-container container">
-      <div class="results" id="wins">Wins</div>
-      <div class="results" id="losses">Losses</div>
-    </div>
     <script src="/index.js"></script>
   </body>
 </html>
