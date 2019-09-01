@@ -1,41 +1,51 @@
-let doorsArray = document.querySelectorAll(".door");
+const doorsArray = document.querySelectorAll(".door");
 // door variables:
-let openImg = "/img/door-open-red.png";
-let closeImg = "/img/door-closed-red.png";
+const openImg = "/img/door-open-red.png";
+const closeImg = "/img/door-closed-red.png";
 //create goats and car vairables:
 // car
-let carImg = "/img/ferrari.png";
-let car = document.createElement("img");
+const carImg = "/img/ferrari.png";
+const car = document.createElement("img");
 car.setAttribute("src", `${carImg}`);
 car.className = "car";
 // goat
-let goatImg = "/img/goat1.png";
-let goat = document.createElement("img");
+const goatImg = "/img/goat1.png";
+const goat = document.createElement("img");
 goat.setAttribute("src", `${goatImg}`);
 goat.className = "goat";
 goat.cloneNode(true);
-console.log(goat);
-console.log(car);
 
 //car.src = carImg;
 //goat.src = goatImg;
 //goat.style.display = "none";
 
-// host text box
-let hostSays = document.getElementById("hostSays");
 // buttons
 const chooseDoorBtn = document.getElementById("lockChoice");
 const switchBtn = document.getElementById("switch-btn");
 const stayBtn = document.getElementById("stay-btn");
+// switch and stay event listeners
+switchBtn.addEventListener("click", switchFunc);
+stayBtn.addEventListener("click", stayFunc);
+
+// host text box
+let hostSays = document.getElementById("hostSays");
+// buttons
+
 /* create an  function that assigns goats and car to the door. 
     will need to give an image of the goat or car to the door
  */
-
+/* ============= ASSING CAR/GOATS TO DOORS ============= */
+let carDoorId;
 function assignCarGoats() {
   let doorNumber = Math.floor(Math.random() * 3);
   //insideArry[doorNumber].src = carImg;
   // console.log(`src: ${insideArry[doorNumber].src}`);
   doorsArray[doorNumber].appendChild(car);
+  doorsArray[doorNumber].className += " hasCar";
+  carDoorId = doorsArray[doorNumber].id;
+  console.log(
+    `Door Object${doorsArray[doorNumber]} Id of door with car ${carDoorId}`
+  );
   /* doorsArray[doorNumber].appendChild(document.createElement("img")); */
   // setting a src attribute on the image gets rid of an unwanted border
   /*   doorsArray[doorNumber].firstElementChild.setAttribute(
@@ -67,22 +77,27 @@ let hostBlurbs = [
 
 let hostBlurbsCount = 0;
 let clickedDoor;
-
-/* ======== CHOOSE GOAT =========== */
+let clickedDoorId;
+/* ======== CHOOSE DOOR (HIGHLIGHT IT) =========== */
 function choose(clicked_id) {
   clickedDoor = document.getElementById(clicked_id);
+  clickedDoor.className += " doorBorder";
+  clickedDoorId = clickedDoor.id;
+  console.log(`Clicked Door:${clickedDoor}  Clicked Door ID: ${clickedDoorId}`);
+  //Activate the button to lockin choice
   chooseDoorBtn.removeAttribute("disabled");
   for (let i = 0; i < doorsArray.length; i++) {
-    if ((doorsArray[i].style.border = "5px solid blue")) {
-      doorsArray[i].style.border = "none";
+    if (doorsArray[i].id != clickedDoorId) {
+      doorsArray[i].classList.remove("doorBorder");
     }
   }
 
-  if (clickedDoor.style.border != "5px solid blue") {
+  /* if (clickedDoor.style.border != "5px solid blue") {
     clickedDoor.style.border = "5px solid blue";
+    console.log(clickedDoor.classList[1]);
   } else {
     clickedDoor.style.border = "none";
-  }
+  } */
   // host says:
   hostSays.innerHTML = hostBlurbs[hostBlurbsCount];
   if (hostBlurbsCount < hostBlurbs.length - 1) {
@@ -91,7 +106,8 @@ function choose(clicked_id) {
 }
 
 /* =========== REVEAL THE FIRST GOAT ================== */
-
+let revealedGoat;
+let revealedGoatId;
 function openGoat() {
   // chooseDoor button disabled & pointerEvents: 'none'
   chooseDoorBtn.setAttribute("disabled", true);
@@ -114,6 +130,7 @@ function openGoat() {
     ) {
       doorsArray[i].style.backgroundImage = `url(${openImg})`;
       doorsArray[i].firstElementChild.style.display = "block";
+      revealedGoatId = doorsArray[i].id;
       console.log(doorsArray[i].childNodes);
       break;
     }
@@ -123,6 +140,31 @@ function openGoat() {
   // all a function if switch or stay is clicked.
 }
 
+/* ========= SWITCH FUNCTION ========== */
+function switchFunc() {
+  //alert(`Reveald Goat Id: ${revealedGoatId}`);
+  clickedDoor.classList.remove("doorBorder");
+  for (let i = 0; i < doorsArray.length; i++) {
+    if (
+      doorsArray[i].id !== clickedDoorId &&
+      doorsArray[i].id !== revealedGoatId
+    ) {
+      doorsArray[i].className += " doorBorder";
+    }
+  }
+  switchBtn.setAttribute("disabled", true);
+  stayBtn.setAttribute("disabled", true);
+
+  //console.log(switchBtn);
+}
+/* ^^^^^^^^ SWITCH FUNCTION ^^^^^^^^^^^^ */
+
+/* ======== STAY FUNCTION =========== */
+function stayFunc() {
+  //console.log(`hello`);
+  //alert(`You chosen to stay`);
+}
+/* ^^^^^^^^^^^^^ STAY FUNCTION ^^^^^^^^^^ */
 /* !!!!!!!!!!!!!!!! EXPERIMENTAL !!!!!!!!!!!!! */
 //change the backround image for all .door classes randomly
 

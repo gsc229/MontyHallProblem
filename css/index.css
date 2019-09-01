@@ -54,6 +54,9 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
 }
+.doorBorder {
+  border: 5px solid blue;
+}
 .door:hover {
   cursor: pointer;
 }
@@ -86,7 +89,6 @@ img {
 .btn-container .game-btn:hover {
   cursor: pointer;
   background: rgba(160, 7, 3, 0.8);
-  border: 5px solid black;
 }
 .btn-container .game-btn:disabled {
   background: grey;
