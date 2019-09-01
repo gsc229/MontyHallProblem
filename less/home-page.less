@@ -54,34 +54,38 @@ img {
   justify-content: space-evenly;
   height: fit-content;
   padding: 30px;
+  .door {
+    height: 400px;
+    width: 200px;
+    // !!!!!!!! POINTER EVENTS
+    font-size: 20px;
+    background-image: url(/img/door-closed-red.png);
+    //background-image: url(/img/door-open-red.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .doorBorder {
+    border: 10px solid blue;
+  }
+
+  .door:hover {
+    cursor: pointer;
+  }
 }
 
-.door {
-  height: 400px;
-  width: 200px;
-
-  font-size: 20px;
-  background-image: url(/img/door-closed-red.png);
-  //background-image: url(/img/door-open-red.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.doorBorder {
-  border: 5px solid blue;
-}
-
-.door:hover {
-  cursor: pointer;
-}
-
-.results {
-  display: inline-block;
-  height: 100px;
-  width: 100px;
-  margin: 50px;
-  border: 2px solid blue;
-  font-size: 20px;
+.results-container {
+  display: flex;
+  div {
+    width: 50%;
+  }
+  .results {
+    height: 100px;
+    width: 100px;
+    margin: 50px auto;
+    border: 2px solid blue;
+    font-size: 80px;
+  }
 }
 
 .btn-container {

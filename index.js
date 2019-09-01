@@ -15,9 +15,11 @@ goat.setAttribute("src", `${goatImg}`);
 goat.className = "goat";
 goat.cloneNode(true);
 
-//car.src = carImg;
-//goat.src = goatImg;
-//goat.style.display = "none";
+// score trackers
+let wins = 0;
+let losses = 0;
+const winsBox = document.getElementById("wins");
+const lossesBox = document.getElementById("losses");
 
 // buttons
 const chooseDoorBtn = document.getElementById("lockChoice");
@@ -61,7 +63,7 @@ function assignCarGoats() {
       ele.firstElementChild.setAttribute("src", "/img/goat1.png");
       ele.firstElementChild.className = "goat"; */
       ele.firstElementChild.style.display = "none";
-    } //else ele.firstElementChild.style.display = "none";
+    } else ele.firstElementChild.style.display = "none";
   });
 }
 assignCarGoats();
@@ -81,6 +83,7 @@ let clickedDoorId;
 /* ======== CHOOSE DOOR (HIGHLIGHT IT) =========== */
 function choose(clicked_id) {
   clickedDoor = document.getElementById(clicked_id);
+  //give the clicked element a border to distinguish
   clickedDoor.className += " doorBorder";
   clickedDoorId = clickedDoor.id;
   console.log(`Clicked Door:${clickedDoor}  Clicked Door ID: ${clickedDoorId}`);
@@ -140,7 +143,12 @@ function openGoat() {
   // all a function if switch or stay is clicked.
 }
 
+// vars for switch function:
+let switchedDoor;
+let switchedDoorId;
+
 /* ========= SWITCH FUNCTION ========== */
+
 function switchFunc() {
   //alert(`Reveald Goat Id: ${revealedGoatId}`);
   clickedDoor.classList.remove("doorBorder");
@@ -150,10 +158,38 @@ function switchFunc() {
       doorsArray[i].id !== revealedGoatId
     ) {
       doorsArray[i].className += " doorBorder";
+      switchedDoorId = doorsArray[i].id;
+      console.log(
+        `Car D. ID: ${carDoorId} Clicked D. ID: ${clickedDoorId} Swithced D. ID: ${switchedDoorId}`
+      );
     }
   }
   switchBtn.setAttribute("disabled", true);
   stayBtn.setAttribute("disabled", true);
+
+  //tally score after switching.
+
+  if (switchedDoorId === carDoorId) {
+    wins += 1;
+    winsBox.innerHTML = wins;
+
+    console.log(`Wins: ${wins}`);
+  } else {
+    losses += 1;
+    lossesBox.innerHTML = losses;
+    console.log(`Losses: ${losses}`);
+  }
+
+  // Open all the doors...
+  for (let i = 0; i < doorsArray.length; i++) {
+    {
+      doorsArray[i].style.backgroundImage = `url(${openImg})`;
+      doorsArray[i].firstElementChild.style.display = "block";
+    }
+  }
+  setTimeout(() => {
+    resetVariables();
+  }, 3000);
 
   //console.log(switchBtn);
 }
@@ -165,6 +201,22 @@ function stayFunc() {
   //alert(`You chosen to stay`);
 }
 /* ^^^^^^^^^^^^^ STAY FUNCTION ^^^^^^^^^^ */
+
+/* =========  tally ============== */
+function resetVariables() {
+  //reset all the buttons
+  chooseDoorBtn.setAttribute("disabled", false);
+  chooseDoorBtn.style.pointerEvents = "initial";
+  console.log(chooseDoorBtn.attributes);
+  //reset all the doors:
+  for (i = 0; i < doorsArray.length; i++) {
+    doorsArray[i].style.backgroundImage = `url(${closeImg})`;
+    doorsArray[i].firstElementChild.style.display = "none";
+    doorsArray[i].style.pointerEvents = "initial";
+    doorsArray[i].classList.remove("doorBorder");
+  }
+}
+
 /* !!!!!!!!!!!!!!!! EXPERIMENTAL !!!!!!!!!!!!! */
 //change the backround image for all .door classes randomly
 

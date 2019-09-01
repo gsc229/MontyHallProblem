@@ -46,7 +46,7 @@ img {
   height: fit-content;
   padding: 30px;
 }
-.door {
+.door-container .door {
   height: 400px;
   width: 200px;
   font-size: 20px;
@@ -54,19 +54,24 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.doorBorder {
-  border: 5px solid blue;
+.door-container .doorBorder {
+  border: 10px solid blue;
 }
-.door:hover {
+.door-container .door:hover {
   cursor: pointer;
 }
-.results {
-  display: inline-block;
+.results-container {
+  display: flex;
+}
+.results-container div {
+  width: 50%;
+}
+.results-container .results {
   height: 100px;
   width: 100px;
-  margin: 50px;
+  margin: 50px auto;
   border: 2px solid blue;
-  font-size: 20px;
+  font-size: 80px;
 }
 .btn-container {
   display: flex;
