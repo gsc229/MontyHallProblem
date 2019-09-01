@@ -73,8 +73,8 @@ function assignCarGoats() {
       /* ele.appendChild(document.createElement("img"));
       ele.firstElementChild.setAttribute("src", "/img/goat1.png");
       ele.firstElementChild.className = "goat"; */
-      ele.firstElementChild.style.display = "none";
-    } else ele.firstElementChild.style.display = "none";
+      //ele.firstElementChild.style.display = "none";
+    } //else ele.firstElementChild.style.display = "none";
   });
 }
 // want this function to run as soon as the document loads, so it's called in the golbal scope
@@ -101,6 +101,7 @@ function choose(clicked_id) {
   console.log(`Clicked Door:${clickedDoor}  Clicked Door ID: ${clickedDoorId}`);
   //Activate the button to lockin choice
   chooseDoorBtn.removeAttribute("disabled");
+  // without this, you'll continue highligting all the doors you click
   for (let i = 0; i < doorsArray.length; i++) {
     if (doorsArray[i].id != clickedDoorId) {
       doorsArray[i].classList.remove("doorBorder");
@@ -211,11 +212,23 @@ function switchDoorFunc() {
 function stayFunc() {
   //console.log(`hello`);
   //alert(`You chosen to stay`);
+  if (clickedDoorId === carDoorId) {
+    wins += 1;
+  } else losses += 1;
+
+  for (let i = 0; i < doorsArray.length; i++) {
+    {
+      doorsArray[i].style.backgroundImage = `url(${openImg})`;
+      doorsArray[i].firstElementChild.style.display = "block";
+    }
+  }
 }
 /* ^^^^^^^^^^^^^ STAY FUNCTION ^^^^^^^^^^ */
 
 /* =========  tally ============== */
 function resetVariables() {
+  // reset the host text:
+  hostSays.innerHTML = "Okay, continue clickin'";
   //reset all the buttons
   chooseDoorBtn.setAttribute("disabled", false);
   chooseDoorBtn.style.pointerEvents = "initial";

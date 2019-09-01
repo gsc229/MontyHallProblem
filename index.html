@@ -12,6 +12,17 @@
     <div class="wrapper">
       <div class="banner">
         <h1 id="hostSays">Choose a door</h1>
+        <div class="results-container container">
+          <div>
+            <h2>Wins</h2>
+            <div class="results" id="wins">0</div>
+          </div>
+          <div>
+            <h2>Losses</h2>
+            <div class="results" id="losses">0</div>
+          </div>
+        </div>
+        <!-- results container -->
       </div>
 
       <div class="door-container container">
@@ -34,26 +45,18 @@
           id="lockChoice"
           onclick="openGoat()"
         >
-          Choose Door Button
+          Click here to lock in your choice
         </button>
         <button type="button" disabled class="game-btn" id="switch-btn">
           Switch</button
         ><br />
+        <h2>or...</h2>
         <button type="button" disabled class="game-btn" id="stay-btn">
           Stay
         </button>
       </div>
-      <div class="results-container container">
-        <div>
-          <h2>Wins</h2>
-          <div class="results" id="wins">0</div>
-        </div>
-        <div>
-          <h2>Losses</h2>
-          <div class="results" id="losses">0</div>
-        </div>
-      </div>
     </div>
+    <!-- wrapper container -->
 
     <script src="/index.js"></script>
   </body>
