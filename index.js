@@ -22,11 +22,13 @@ const winsBox = document.getElementById("wins");
 const lossesBox = document.getElementById("losses");
 
 // buttons
+const startBtn = document.getElementById("start-btn");
 const chooseDoorBtn = document.getElementById("lockChoice");
 const switchBtn = document.getElementById("switch-btn");
 const stayBtn = document.getElementById("stay-btn");
 // switch and stay event listeners
-switchBtn.addEventListener("click", switchFunc);
+
+switchBtn.addEventListener("click", switchDoorFunc);
 stayBtn.addEventListener("click", stayFunc);
 
 // host text box
@@ -36,18 +38,27 @@ let hostSays = document.getElementById("hostSays");
 /* create an  function that assigns goats and car to the door. 
     will need to give an image of the goat or car to the door
  */
-/* ============= ASSING CAR/GOATS TO DOORS ============= */
+
+/*^^^^^^^^^^^^^^^^^^VARIABLES ABOVE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+  ================================================================
+  ================================================================
+  ================================================================
+  =====================FUCNCTIONS BELOW===========================
+  ================================================================
+  ================================================================
+*/
+// variabl assigned from assignCarGoats function:
 let carDoorId;
+/* ============= ASSING CAR/GOATS TO DOORS ============= */
+
 function assignCarGoats() {
   let doorNumber = Math.floor(Math.random() * 3);
-  //insideArry[doorNumber].src = carImg;
-  // console.log(`src: ${insideArry[doorNumber].src}`);
+
+  // assign the car randomly...
   doorsArray[doorNumber].appendChild(car);
   doorsArray[doorNumber].className += " hasCar";
   carDoorId = doorsArray[doorNumber].id;
-  console.log(
-    `Door Object${doorsArray[doorNumber]} Id of door with car ${carDoorId}`
-  );
+  console.log(`from assignCarGoats function: carDoorId: ${carDoorId}`);
   /* doorsArray[doorNumber].appendChild(document.createElement("img")); */
   // setting a src attribute on the image gets rid of an unwanted border
   /*   doorsArray[doorNumber].firstElementChild.setAttribute(
@@ -66,6 +77,7 @@ function assignCarGoats() {
     } else ele.firstElementChild.style.display = "none";
   });
 }
+// want this function to run as soon as the document loads, so it's called in the golbal scope
 assignCarGoats();
 
 let hostBlurbs = [
@@ -125,7 +137,7 @@ function openGoat() {
   stayBtn.removeAttribute("disabled");
   // need a host blurb to ask if player wants to switch
   // find a goat that is also not pickded
-  console.log(`clickedDorrID: ${clickedDoor.id}`);
+  console.log(`from openGoat func...clickedDorrID: ${clickedDoor.id}`);
   for (let i = 0; i < doorsArray.length; i++) {
     if (
       doorsArray[i].id !== clickedDoor.id &&
@@ -147,9 +159,9 @@ function openGoat() {
 let switchedDoor;
 let switchedDoorId;
 
-/* ========= SWITCH FUNCTION ========== */
+/* ========= SWITCH DOOR FUNCTION ========== */
 
-function switchFunc() {
+function switchDoorFunc() {
   //alert(`Reveald Goat Id: ${revealedGoatId}`);
   clickedDoor.classList.remove("doorBorder");
   for (let i = 0; i < doorsArray.length; i++) {
@@ -160,7 +172,7 @@ function switchFunc() {
       doorsArray[i].className += " doorBorder";
       switchedDoorId = doorsArray[i].id;
       console.log(
-        `Car D. ID: ${carDoorId} Clicked D. ID: ${clickedDoorId} Swithced D. ID: ${switchedDoorId}`
+        `Inside Switch Funtion...Car ID: ${carDoorId} Clicked ID: ${clickedDoorId} Swithced D. ID: ${switchedDoorId}`
       );
     }
   }
@@ -207,14 +219,31 @@ function resetVariables() {
   //reset all the buttons
   chooseDoorBtn.setAttribute("disabled", false);
   chooseDoorBtn.style.pointerEvents = "initial";
-  console.log(chooseDoorBtn.attributes);
+  carDoorId = "";
+  clickedDoorId = "";
+  switchedDoorId = "";
+  clickedDoor = "";
+  switchedDoor = "";
+
+  console.log(
+    `resetVariables called: doorsArray.childElementCount: ${doorsArray}`
+  );
+  console.log(`${doorsArray[0].childNodes[0]}`);
   //reset all the doors:
+  /* TO DO:
+    remove the goat/car images from the .door divs
+  */
   for (i = 0; i < doorsArray.length; i++) {
+    let child = doorsArray[i].firstElementChild;
+    doorsArray[i].removeChild(child);
+
     doorsArray[i].style.backgroundImage = `url(${closeImg})`;
-    doorsArray[i].firstElementChild.style.display = "none";
+
     doorsArray[i].style.pointerEvents = "initial";
     doorsArray[i].classList.remove("doorBorder");
   }
+
+  assignCarGoats();
 }
 
 /* !!!!!!!!!!!!!!!! EXPERIMENTAL !!!!!!!!!!!!! */
