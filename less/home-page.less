@@ -1,18 +1,26 @@
 html {
   font-size: 62.5%;
 }
+
+* {
+  //border: 1px solid black;
+  //height: fit-content;
+  margin: 10px;
+  margin: 0 auto;
+}
 h1 {
   font-size: 4rem;
 }
 h2 {
   font-size: 3rem;
 }
-* {
-  //border: 1px solid black;
-  //height: fit-content;
-  margin: 10px;
-  margin: 0 auto;
-  height: fit-content;
+@media @phone {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
 }
 
 .wrapper {
@@ -21,49 +29,28 @@ h2 {
   border: 4px solid black;
 }
 
-.banner {
-  height: 20vh;
-  h1 {
-    text-align: center;
-    margin: 20px auto;
-  }
-  .results-container {
-    border: 2px solid yellow;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    div {
-      //width: 50%;
-      border: 2px solid pink;
-      h2 {
-        margin: 0 auto;
-        border: 2px solid lime;
-      }
-    }
-    .results {
-      height: 100px;
-      width: 100px;
-      margin: 20px auto;
-      border: 2px solid blue;
-      font-size: 80px;
-    }
-  }
-}
-
 .container {
   text-align: center;
   height: fit-content;
 }
+
 img {
   height: 200px;
   width: 200px;
   position: relative;
   top: 58%;
+  @media @phone {
+    height: 50px;
+    width: 50px;
+  }
 }
 
 .goat {
   /* background-image: url(/img/goat1.png); */
   left: -30px;
+  @media @phone {
+    left: -10px;
+  }
 }
 
 .car {
@@ -72,17 +59,66 @@ img {
   background-repeat: no-repeat;
   background-position: bottom; */
   width: 250px;
+  @media @phone {
+    width: 50px;
+    left: 0;
+  }
   left: -25px;
+}
+
+.banner {
+  height: fit-content;
+  //border: 2px solid limegreen;
+
+  h1 {
+    text-align: center;
+    margin: 20px auto;
+  }
+  .results-container {
+    // border: 2px solid yellow;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    div {
+      //width: 50%;
+      // border: 2px solid pink;
+      h2 {
+        margin: 0 auto;
+        // border: 2px solid lime;
+      }
+    }
+    .results {
+      height: 100px;
+      width: 100px;
+      margin: 20px auto;
+      //border: 2px solid blue;
+      font-size: 80px;
+      font-weight: bolder;
+      @media @phone {
+        font-size: 2rem;
+        height: 3vh;
+        width: 3vh;
+      }
+    }
+  }
 }
 
 .door-container {
   display: flex;
+  height: fit-content;
   justify-content: space-evenly;
-  margin: 50px auto;
-  padding: 30px;
-  border: 3px solid red;
+  //border: 2px solid yellow;
+  padding: 0;
+  @media @phone {
+  }
+  //border: 3px solid red;
   .door {
+    @media @phone {
+      height: 100px;
+      width: 50px;
+    }
     height: 400px;
+
     width: 200px;
     // !!!!!!!! POINTER EVENTS
     font-size: 20px;
@@ -94,6 +130,9 @@ img {
 
   .doorBorder {
     border: 10px solid blue;
+    @media @phone {
+      border: 5px solid blue;
+    }
   }
 
   .door:hover {
@@ -101,34 +140,39 @@ img {
   }
 }
 
-.btn-container {
+#btn-container-outer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 70%;
   margin: 20px auto;
-  border: 3px solid pink;
-  h2 {
-    align-self: center;
-  }
-  .game-btn {
-    border-radius: 5%;
-    border: none;
-    font-size: 2.3rem;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    background: rgb(173, 7, 3);
-    background-color: hsl(1, 97%, 35%);
-    color: whitesmoke;
-    margin: 10px;
-    height: fit-content;
-    padding: 20px;
-  }
-  .game-btn:hover {
-    cursor: pointer;
-    background: rgba(160, 7, 3, 0.8);
+  // border: 3px solid pink;
 
-    // background-color: hsl(1, 97%, 35%);
-  }
-  .game-btn:disabled {
-    background: grey;
+  #btn-container-inner {
+    display: flex;
+    .game-btn {
+      border-radius: 5%;
+      border: none;
+      font-size: 2.3rem;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      background: rgb(173, 7, 3);
+      background-color: hsl(1, 97%, 35%);
+      color: whitesmoke;
+      margin: 10px;
+      height: fit-content;
+      padding: 20px;
+      @media @phone {
+        font-size: 1.5rem;
+      }
+    }
+    .game-btn:hover {
+      cursor: pointer;
+      background: rgba(160, 7, 3, 0.8);
+
+      // background-color: hsl(1, 97%, 35%);
+    }
+    .game-btn:disabled {
+      background: grey;
+    }
   }
 }

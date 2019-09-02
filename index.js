@@ -22,7 +22,12 @@ const winsBox = document.getElementById("wins");
 const lossesBox = document.getElementById("losses");
 
 // buttons
-const startBtn = document.getElementById("start-btn");
+const clickDoorH2 = document.getElementById("click-door-h2");
+const buttonsArray = document.querySelectorAll(".game-btn");
+const buttonsInner = document.getElementById("btn-container-inner");
+const swithOrStayContainer = document.getElementById(
+  "switch-or-stay-container"
+);
 const chooseDoorBtn = document.getElementById("lockChoice");
 const switchBtn = document.getElementById("switch-btn");
 const stayBtn = document.getElementById("stay-btn");
@@ -39,7 +44,7 @@ let hostSays = document.getElementById("hostSays");
     will need to give an image of the goat or car to the door
  */
 
-/*^^^^^^^^^^^^^^^^^^VARIABLES ABOVE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+/*^^^^^^^^^^^^^^^^^^ VARIABLES ABOVE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
   ================================================================
   ================================================================
   ================================================================
@@ -53,7 +58,8 @@ let carDoorId;
 
 function assignCarGoats() {
   let doorNumber = Math.floor(Math.random() * 3);
-
+  // hide the buttons until a door is clicked:
+  buttonsInner.style.display = "none";
   // assign the car randomly...
   doorsArray[doorNumber].appendChild(car);
   doorsArray[doorNumber].className += " hasCar";
@@ -73,13 +79,13 @@ function assignCarGoats() {
       /* ele.appendChild(document.createElement("img"));
       ele.firstElementChild.setAttribute("src", "/img/goat1.png");
       ele.firstElementChild.className = "goat"; */
-      //ele.firstElementChild.style.display = "none";
-    } //else ele.firstElementChild.style.display = "none";
+      ele.firstElementChild.style.display = "none";
+    } else ele.firstElementChild.style.display = "none";
   });
 }
 // want this function to run as soon as the document loads, so it's called in the golbal scope
 assignCarGoats();
-
+/* choose function variables */
 let hostBlurbs = [
   "Are you sure that's the door you wan't to choose?",
   "It's alright, you can change if you want to.",
@@ -88,17 +94,20 @@ let hostBlurbs = [
   "That's a 2/3 chance you'll get it wrong",
   "Okay, don't mean to rush you, but we gotta get going here."
 ];
-
 let hostBlurbsCount = 0;
 let clickedDoor;
 let clickedDoorId;
 /* ======== CHOOSE DOOR (HIGHLIGHT IT) =========== */
 function choose(clicked_id) {
   clickedDoor = document.getElementById(clicked_id);
+  //remove 'clicked door' show lock button
+  clickDoorH2.innerHTML = "";
+  buttonsInner.style.display = "flex";
+  swithOrStayContainer.style.display = "none";
   //give the clicked element a border to distinguish
   clickedDoor.className += " doorBorder";
   clickedDoorId = clickedDoor.id;
-  console.log(`Clicked Door:${clickedDoor}  Clicked Door ID: ${clickedDoorId}`);
+  console.log(`Clicked Door ID: ${clickedDoorId} Car Door ID: ${carDoorId}`);
   //Activate the button to lockin choice
   chooseDoorBtn.removeAttribute("disabled");
   // without this, you'll continue highligting all the doors you click
@@ -125,9 +134,12 @@ function choose(clicked_id) {
 let revealedGoat;
 let revealedGoatId;
 function openGoat() {
-  // chooseDoor button disabled & pointerEvents: 'none'
-  chooseDoorBtn.setAttribute("disabled", true);
-  chooseDoorBtn.style.pointerEvents = "none";
+  //remove the lockin door btn
+  chooseDoorBtn.style.display = "none";
+  //show switch or stay container
+  swithOrStayContainer.style.display = "flex";
+  clickDoorH2.innerHTML =
+    "Look! There's a goat behind that door! Would you like to switch to the other closed door or stay on the same one?";
   //turn off the blue border on the doors & pointerEvents: 'none'
   for (let i = 0; i < doorsArray.length; i++) {
     //doorsArray[i].style.border = "none";
@@ -147,7 +159,7 @@ function openGoat() {
       doorsArray[i].style.backgroundImage = `url(${openImg})`;
       doorsArray[i].firstElementChild.style.display = "block";
       revealedGoatId = doorsArray[i].id;
-      console.log(doorsArray[i].childNodes);
+
       break;
     }
   }
@@ -212,9 +224,14 @@ function switchDoorFunc() {
 function stayFunc() {
   //console.log(`hello`);
   //alert(`You chosen to stay`);
+  console.log(`Clicked Door ID: ${clickedDoorId} Car Door ID: ${carDoorId}`);
   if (clickedDoorId === carDoorId) {
     wins += 1;
-  } else losses += 1;
+    winsBox.innerHTML = wins;
+  } else {
+    losses += 1;
+    lossesBox.innerHTML = losses;
+  }
 
   for (let i = 0; i < doorsArray.length; i++) {
     {
@@ -222,6 +239,11 @@ function stayFunc() {
       doorsArray[i].firstElementChild.style.display = "block";
     }
   }
+  switchBtn.setAttribute("disabled", true);
+  stayBtn.setAttribute("disabled", true);
+  setTimeout(() => {
+    resetVariables();
+  }, 3000);
 }
 /* ^^^^^^^^^^^^^ STAY FUNCTION ^^^^^^^^^^ */
 
@@ -229,7 +251,11 @@ function stayFunc() {
 function resetVariables() {
   // reset the host text:
   hostSays.innerHTML = "Okay, continue clickin'";
+  clickDoorH2.innerHTML = "Go Again!";
   //reset all the buttons
+  buttonsInner.style.display = "flex";
+  chooseDoorBtn.style.display = "flex";
+  swithOrStayContainer.style.display = "none";
   chooseDoorBtn.setAttribute("disabled", false);
   chooseDoorBtn.style.pointerEvents = "initial";
   carDoorId = "";

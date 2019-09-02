@@ -37,23 +37,28 @@
         </div>
       </div>
 
-      <div class="btn-container container">
-        <button
-          type="button"
-          disabled
-          class="game-btn"
-          id="lockChoice"
-          onclick="openGoat()"
-        >
-          Click here to lock in your choice
-        </button>
-        <button type="button" disabled class="game-btn" id="switch-btn">
-          Switch</button
-        ><br />
-        <h2>or...</h2>
-        <button type="button" disabled class="game-btn" id="stay-btn">
-          Stay
-        </button>
+      <div id="btn-container-outer" class="container">
+        <h2 id="click-door-h2">Click on a door</h2>
+        <div id="btn-container-inner">
+          <button
+            type="button"
+            disabled
+            class="game-btn"
+            id="lockChoice"
+            onclick="openGoat()"
+          >
+            Click here to lock in your choice
+          </button>
+          <div id="switch-or-stay-container">
+            <button type="button" disabled class="game-btn" id="switch-btn">
+              Switch</button
+            ><br />
+
+            <button type="button" disabled class="game-btn" id="stay-btn">
+              Stay
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- wrapper container -->

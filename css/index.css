@@ -1,48 +1,28 @@
 html {
   font-size: 62.5%;
 }
+* {
+  margin: 10px;
+  margin: 0 auto;
+}
 h1 {
   font-size: 4rem;
 }
 h2 {
   font-size: 3rem;
 }
-* {
-  margin: 10px;
-  margin: 0 auto;
-  height: fit-content;
+@media (max-width: 700px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
 }
 .wrapper {
   max-width: 960px;
   height: fit-content;
   border: 4px solid black;
-}
-.banner {
-  height: 20vh;
-}
-.banner h1 {
-  text-align: center;
-  margin: 20px auto;
-}
-.banner .results-container {
-  border: 2px solid yellow;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-.banner .results-container div {
-  border: 2px solid pink;
-}
-.banner .results-container div h2 {
-  margin: 0 auto;
-  border: 2px solid lime;
-}
-.banner .results-container .results {
-  height: 100px;
-  width: 100px;
-  margin: 20px auto;
-  border: 2px solid blue;
-  font-size: 80px;
 }
 .container {
   text-align: center;
@@ -54,9 +34,20 @@ img {
   position: relative;
   top: 58%;
 }
+@media (max-width: 700px) {
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}
 .goat {
   /* background-image: url(/img/goat1.png); */
   left: -30px;
+}
+@media (max-width: 700px) {
+  .goat {
+    left: -10px;
+  }
 }
 .car {
   /* background-image: url(/img/ferrari.png);
@@ -66,12 +57,46 @@ img {
   width: 250px;
   left: -25px;
 }
+@media (max-width: 700px) {
+  .car {
+    width: 50px;
+    left: 0;
+  }
+}
+.banner {
+  height: fit-content;
+}
+.banner h1 {
+  text-align: center;
+  margin: 20px auto;
+}
+.banner .results-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.banner .results-container div h2 {
+  margin: 0 auto;
+}
+.banner .results-container .results {
+  height: 100px;
+  width: 100px;
+  margin: 20px auto;
+  font-size: 80px;
+  font-weight: bolder;
+}
+@media (max-width: 700px) {
+  .banner .results-container .results {
+    font-size: 2rem;
+    height: 3vh;
+    width: 3vh;
+  }
+}
 .door-container {
   display: flex;
+  height: fit-content;
   justify-content: space-evenly;
-  margin: 50px auto;
-  padding: 30px;
-  border: 3px solid red;
+  padding: 0;
 }
 .door-container .door {
   height: 400px;
@@ -81,23 +106,34 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
 }
+@media (max-width: 700px) {
+  .door-container .door {
+    height: 100px;
+    width: 50px;
+  }
+}
 .door-container .doorBorder {
   border: 10px solid blue;
+}
+@media (max-width: 700px) {
+  .door-container .doorBorder {
+    border: 5px solid blue;
+  }
 }
 .door-container .door:hover {
   cursor: pointer;
 }
-.btn-container {
+#btn-container-outer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 70%;
   margin: 20px auto;
-  border: 3px solid pink;
 }
-.btn-container h2 {
-  align-self: center;
+#btn-container-outer #btn-container-inner {
+  display: flex;
 }
-.btn-container .game-btn {
+#btn-container-outer #btn-container-inner .game-btn {
   border-radius: 5%;
   border: none;
   font-size: 2.3rem;
@@ -109,10 +145,15 @@ img {
   height: fit-content;
   padding: 20px;
 }
-.btn-container .game-btn:hover {
+@media (max-width: 700px) {
+  #btn-container-outer #btn-container-inner .game-btn {
+    font-size: 1.5rem;
+  }
+}
+#btn-container-outer #btn-container-inner .game-btn:hover {
   cursor: pointer;
   background: rgba(160, 7, 3, 0.8);
 }
-.btn-container .game-btn:disabled {
+#btn-container-outer #btn-container-inner .game-btn:disabled {
   background: grey;
 }
